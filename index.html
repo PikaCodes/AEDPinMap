@@ -1,17 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <title>AED Map</title>
+  
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
   <style>
-    #map {
-      height: 600px;
-      width: 1000px;
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
     }
+        #app {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+          
+        #sidebar {
+          width: 280px;
+          padding: 15px;
+          background: #222;
+          color: #fff;
+        }
+          #map {
+            flex: 1;
+          }
+          #bottombar {
+            display: none;
+            Background: #222;
+            color: #fff
+            padding: 10px;
+            height: 80;
+            text-align: center;
+          }
+          @media (max-width: 768px) {
+            #app {
+              flex-direction: column;
+            }
+
+            #sidebar {
+              display: none;
+            }
+
+            #map {
+              height: calc(100vh - 80px);
+            }
+            #bottombar {
+              display: block;
+            }
+          }
   </style>
 </head>
 <body>
 
+  <div id="app">
+    <div id="sidebar">
+      <h3> AED Map</h3>
+      <p>Sidebar Content Goes Here</p>
+</div>
+  
 <div id="map"></div>
+
+<div id="bottomBar">
+  Mobile Navigation / Buttons
+</div>
+
+</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
