@@ -90,10 +90,8 @@
     maxZoom: 19
   }).addTo(map);
 
-  // ------------------------
   // Add markers from locations.js
-  // ------------------------
-  locations.forEach(loc => {
+  AED_LOCATIONS.forEach(loc => {
     L.marker(loc.coords)
       .addTo(map)
       .bindPopup(`<b>${loc.name}</b><br>${loc.description}`);
