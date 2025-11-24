@@ -13,6 +13,5 @@ const AED_LOCATIONS = [
     name: "AED Pin Test 3",
     coords: [48.53569310294545, -123.01794009724279],
     description: "idk"
-  },
-  {
+  }
 ];
