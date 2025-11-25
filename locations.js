@@ -5,13 +5,18 @@ const AED_LOCATIONS = [
     description: "The AED is located at the main entrances; you'll need to be allowed in to enter."
   },
   {
-    name: "AED Pin Test 2",
-    coords: [48.53463153713263, -123.01754179399637],
-    description: "pray the lord that this works"
+    name: "PIN TEST 1",
+    coords: [48.53587796889522, -123.01906053399537],
+    description: "Lack of Assistance"
   },
   {
-    name: "AED Pin Test 3",
-    coords: [48.53569310294545, -123.01794009724279],
-    description: "idk"
+    name: "PeaceHealth Hospital",
+    coords: [48.527019528029555, -123.02982557933322],
+    description: "This is a Hospital. They'll have one."
+  },
+  {
+    name: "San Juan Island EMS",
+    coords: [48.5274535034384, -123.0304474282205],
+    description: "This is the San Juan Island Emergency Medical Service. They'll most likely have one."
   }
 ];
