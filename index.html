@@ -42,7 +42,24 @@
       color: #fff;
       padding: 10px;
       height: 80px;
-      text-align: center;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    #bottomBar button {
+      flex: 1;
+      margin: 0 5px;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: #444;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    #bottomBar button:hover {
+      background: #666;
     }
 
     /* Mobile layout */
@@ -60,7 +77,35 @@
       }
 
       #bottomBar {
-        display: block;
+        display: flex;
+      }
+    }
+
+    /* Popup */
+    #creditsPopup {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(3px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #creditsPopupContent {
+      background: #fff;
+      color: #000;
+      padding: 20px;
+      max-width: 400px;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #creditsPopupContent {
+        background: #222;
+        color: #fff;
       }
     }
   </style>
@@ -76,7 +121,22 @@
     <div id="map"></div>
 
     <div id="bottomBar">
-      AED Mobile Bar
+      <button id="aedListBtn">AED List</button>
+      <button id="creditsBtn">Credits / Info</button>
+    </div>
+  </div>
+
+  <!-- Credits Popup -->
+  <div id="creditsPopup">
+    <div id="creditsPopupContent">
+      <h2>Project Credits & Info</h2>
+      <p>This AED Map project includes contributions, libraries, and external resources.</p>
+      <ul>
+        <li><a href="#" target="_blank">Leaflet Documentation</a></li>
+        <li><a href="#" target="_blank">Map Tiles Provider</a></li>
+        <li><a href="#" target="_blank">Project GitHub Repository</a></li>
+      </ul>
+      <button id="closeCreditsBtn">Close</button>
     </div>
   </div>
 
@@ -97,6 +157,28 @@
       L.marker(loc.coords)
         .addTo(map)
         .bindPopup(`<b>${loc.name}</b><br>${loc.description}`);
+    });
+
+    // Credits popup logic
+    const creditsBtn = document.getElementById('creditsBtn');
+    const creditsPopup = document.getElementById('creditsPopup');
+    const closeCreditsBtn = document.getElementById('closeCreditsBtn');
+
+    creditsBtn.addEventListener('click', () => {
+      creditsPopup.style.display = 'flex';
+    });
+
+    closeCreditsBtn.addEventListener('click', () => {
+      creditsPopup.style.display = 'none';
+    });
+
+    creditsPopup.addEventListener('click', (e) => {
+      if(e.target === creditsPopup) creditsPopup.style.display = 'none';
+    });
+
+    // AED List button (example, can be hooked to real panel)
+    document.getElementById('aedListBtn').addEventListener('click', () => {
+      alert('Show AED List panel');
     });
   </script>
 
