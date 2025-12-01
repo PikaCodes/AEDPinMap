@@ -24,6 +24,8 @@
 
     /* Sidebar (desktop) */
     #sidebar {
+      display: flex;
+      flex-direction: column;
       width: 280px;
       padding: 15px;
       background: #222;
@@ -80,6 +82,30 @@
       }
     }
 
+    /* Sidebar Credits button */
+    .sidebarBtn {
+      width: 100%;
+      padding: 12px;
+      margin-top: auto; /* push to bottom */
+      background: #444;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .sidebarBtn:hover {
+      background: #666;
+    }
+
+    @media (max-width: 768px) {
+      .sidebarBtn {
+        display: none;
+      }
+    }
+
     /* Popup */
     #creditsPopup {
       position: fixed;
@@ -101,6 +127,7 @@
     }
 
     #creditsPopupContent {
+      position: relative;
       background: #fff;
       color: #000;
       padding: 20px;
@@ -111,8 +138,29 @@
       transition: transform 0.25s ease;
     }
 
+    /* Animation when shown */
     #creditsPopup.show #creditsPopupContent {
       transform: translateY(0);
+    }
+
+    /* THE CLOSE BUTTON (X) */
+    .closeBtn {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      opacity: 0.7;
+      color: inherit;
+      transition: opacity 0.2s ease;
+    }
+
+    .closeBtn:hover {
+      opacity: 1;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -129,6 +177,9 @@
     <div id="sidebar">
       <h3>The AED Map</h3>
       <p>This is the sidebar where stuff goes.</p>
+
+      <!-- Desktop Credits button -->
+      <button id="sidebarCreditsBtn" class="sidebarBtn">Credits & Info</button>
     </div>
 
     <div id="map"></div>
@@ -142,6 +193,7 @@
   <!-- Credits Popup -->
   <div id="creditsPopup">
     <div id="creditsPopupContent">
+      <button id="closeCreditsBtn" class="closeBtn">×</button>
       <h2>Credits & Info</h2>
       <p>This website was a project for a class, it's meant to assist people in finding Defibrillators in Friday Harbor.</p>
       <ul>
@@ -149,7 +201,6 @@
         <li><a href="#" target="_blank">Map Tiles Provider</a></li>
         <li><a href="#" target="_blank">Project GitHub Repository</a></li>
       </ul>
-      <button id="closeCreditsBtn">Close</button>
     </div>
   </div>
 
@@ -174,24 +225,33 @@
 
     // Credits popup logic
     const creditsBtn = document.getElementById('creditsBtn');
+    const sidebarCreditsBtn = document.getElementById('sidebarCreditsBtn');
     const creditsPopup = document.getElementById('creditsPopup');
     const closeCreditsBtn = document.getElementById('closeCreditsBtn');
 
+    // Mobile bottom bar button
     creditsBtn.addEventListener('click', () => {
       creditsPopup.classList.add('show');
     });
 
+    // Desktop sidebar button
+    sidebarCreditsBtn.addEventListener('click', () => {
+      creditsPopup.classList.add('show');
+    });
+
+    // Close button (X)
     closeCreditsBtn.addEventListener('click', () => {
       creditsPopup.classList.remove('show');
     });
 
+    // Click outside popup to close
     creditsPopup.addEventListener('click', (e) => {
       if(e.target === creditsPopup) {
         creditsPopup.classList.remove('show');
       }
     });
 
-    // AED List button (example, can be hooked to real panel)
+    // AED List button (example)
     document.getElementById('aedListBtn').addEventListener('click', () => {
       alert('Show AED List panel');
     });
