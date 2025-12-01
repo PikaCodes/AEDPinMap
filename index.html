@@ -82,14 +82,22 @@
 
     /* Popup */
     #creditsPopup {
-      display: none;
       position: fixed;
+      display: flex;
       inset: 0;
       background: rgba(0,0,0,0.5);
       backdrop-filter: blur(3px);
       justify-content: center;
       align-items: center;
       z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    #creditsPopup.show {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     #creditsPopupContent {
@@ -99,6 +107,12 @@
       max-width: 400px;
       border-radius: 16px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      transform: translateY(40px);
+      transition: transform 0.25s ease;
+    }
+
+    #creditsPopup.show #creditsPopupContent {
+      transform: translateY(0);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -164,15 +178,17 @@
     const closeCreditsBtn = document.getElementById('closeCreditsBtn');
 
     creditsBtn.addEventListener('click', () => {
-      creditsPopup.style.display = 'flex';
+      creditsPopup.classList.add('show');
     });
 
     closeCreditsBtn.addEventListener('click', () => {
-      creditsPopup.style.display = 'none';
+      creditsPopup.classList.remove('show');
     });
 
     creditsPopup.addEventListener('click', (e) => {
-      if(e.target === creditsPopup) creditsPopup.style.display = 'none';
+      if(e.target === creditsPopup) {
+        creditsPopup.classList.remove('show');
+      }
     });
 
     // AED List button (example, can be hooked to real panel)
